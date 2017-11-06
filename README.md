@@ -1,4 +1,4 @@
-This is a shopping list app with firebase realtime database.
+This is a shopping list app with sqlite database.
 
 ## How To Use This App
 
