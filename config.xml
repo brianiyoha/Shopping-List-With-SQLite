@@ -3,7 +3,7 @@
     <name>BShop</name>
     <description>An app to help keep track of your shopping items.</description>
     <author email="brian98ehis@gmail.com" href="">Brian Iyoha</author>
-    <content original-src="index.html" src="http://10.10.102.198:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

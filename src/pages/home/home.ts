@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, IonicPage,NavParams } from 'ionic-angular';
+import { NavController, IonicPage} from 'ionic-angular';
 import { Item } from '../../model/item.model';
-import { ShoppingListService } from '../../service/shopping-list/shopping-list.service';
 import { ToastService } from '../../service/toast/toast.service';
 import { SqlProvider } from '../../providers/sql/sql';
 
@@ -14,7 +13,7 @@ export class HomePage {
 
  
   shoppingList$: any;
-  constructor(private sql: SqlProvider,private toast: ToastService,private shop:ShoppingListService,  public navCtrl: NavController ) {
+  constructor(private sql: SqlProvider,private toast: ToastService, public navCtrl: NavController ) {
     sql.getDatabaseState().subscribe(state=>{
     if(state){
     this.sql.getItem().then(data=>{
@@ -29,7 +28,11 @@ export class HomePage {
   removeItem(item: Item){
     this.sql.removeItem(item)
     .then(()=>{
-      this.toast.show(`${item.name} Deleted!`);
-    })
+      this.sql.getItem().then(data => {
+        this.shoppingList$ = data;
+        this.toast.show(`${item.name} Deleted!`);
+
+      });
+    });
   }
 }

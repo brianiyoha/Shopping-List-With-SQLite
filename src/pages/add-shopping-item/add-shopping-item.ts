@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 import { Item } from '../../model/item.model';
-import { ShoppingListService } from '../../service/shopping-list/shopping-list.service';
 import { ToastService } from '../../service/toast/toast.service';
 import { SqlProvider } from "../../providers/sql/sql";
 
@@ -19,7 +18,7 @@ export class AddShoppingItemPage {
     quantity: 0,
     price: 0
   };
-  constructor(private sqlDB:SqlProvider, private toast:ToastService,private shop: ShoppingListService,public navCtrl: NavController) {
+  constructor(private sqlDB:SqlProvider, private toast:ToastService,public navCtrl: NavController) {
   }
 
   ionViewDidLoad() {
