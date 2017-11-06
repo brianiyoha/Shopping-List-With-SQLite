@@ -2,5 +2,7 @@
   "name": "shoppinglist",
   "app_id": "b78b773d",
   "type": "ionic-angular",
-  "integrations": {}
+  "integrations": {
+    "cordova": {}
+  }
 }

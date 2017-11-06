@@ -7,9 +7,9 @@ import {AngularFireModule} from 'angularfire2';
 import {AngularFireDatabaseModule} from 'angularfire2/database';
 import { MyApp } from './app.component';
 import {FIREBASE_CONFIG} from './firebase.config';
-import { ShoppingListService } from '../service/shopping-list/shopping-list.service';
 import { ToastService } from '../service/toast/toast.service';
-
+import { SqlProvider } from '../providers/sql/sql';
+import { SQLite } from '@ionic-native/sqlite';
 @NgModule({
   declarations: [
     MyApp,
@@ -28,8 +28,9 @@ import { ToastService } from '../service/toast/toast.service';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ShoppingListService,
-    ToastService
+    ToastService,
+    SqlProvider,
+    SQLite
   ]
 })
 export class AppModule {}

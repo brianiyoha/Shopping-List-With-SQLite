@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, IonicPage,NavParams } from 'ionic-angular';
 import { Item } from '../../model/item.model';
-import { Observable } from 'rxjs/Observable';
 import { ShoppingListService } from '../../service/shopping-list/shopping-list.service';
 import { ToastService } from '../../service/toast/toast.service';
+import { SqlProvider } from '../../providers/sql/sql';
 
 @IonicPage()
 @Component({
@@ -12,20 +12,22 @@ import { ToastService } from '../../service/toast/toast.service';
 })
 export class HomePage {
 
-  shoppingList$: Observable<Item[]>;
-  constructor(private toast: ToastService,private shop:ShoppingListService,  public navCtrl: NavController, private navParam: NavParams ) {
-    this.shoppingList$ = this.shop
-    .getShoppingList()
-    .snapshotChanges()
-    .map(changes=>{
-      return changes.map(c=>({
-        key: c.payload.key,...c.payload.val()
-      }))
+ 
+  shoppingList$: any;
+  constructor(private sql: SqlProvider,private toast: ToastService,private shop:ShoppingListService,  public navCtrl: NavController ) {
+    sql.getDatabaseState().subscribe(state=>{
+    if(state){
+    this.sql.getItem().then(data=>{
+     this.shoppingList$ = data;
+   });
+  }else{
+    console.log("DB NOt READY");
+  }
     })
   }
 
   removeItem(item: Item){
-    this.shop.removeItem(item)
+    this.sql.removeItem(item)
     .then(()=>{
       this.toast.show(`${item.name} Deleted!`);
     })
